@@ -1,0 +1,172 @@
+/* The :root pseudo-class in CSS represents the root element of the document. In HTML, this is typically the <html> element.
+
+When you define styles inside :root, they apply globally and can be accessed throughout the document. The :root selector is often used to define CSS custom properties (variables) that can be reused.
+
+Breaking down your code:
+css
+:root {
+  --main-color: #dc143c;
+}
+:root: Targets the root element of the document (usually <html> in HTML).
+--main-color: Defines a CSS custom property named --main-color.
+#dc143c: Sets the value of the --main-color property to #dc143c (Crimson red).
+Usage Example:
+You can reuse --main-color anywhere in your CSS:
+
+css
+body {
+  color: var(--main-color); // Text color set to Crimson.
+}
+
+h1 {
+  background-color: var(--main-color); // Background color set to Crimson.
+}
+Benefits:
+Reusability: You can use --main-color across multiple styles.
+Maintainability: To change the color, you only need to update it in the :root section, and it will reflect everywhere it's used.
+Theming: Makes it easier to create and manage themes by defining a palette in one place. */
+
+/*
+The @keyframes rule defines animations in CSS. In the animation pop, the element scales up, rotates, and fades out at 100% of the animation. Here's an example of how to implement it in CSS:
+
+Full Example
+css
+Copy code
+Define the keyframes for the animation:
+@keyframes pop {
+    100% {
+      transform: scale(1.7) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+  
+ Apply the animation to an element:
+  .pop-element {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation: pop 0.5s ease-out forwards;
+  }
+  Explanation:
+  @keyframes pop:
+  
+  Defines the animation named pop.
+  At 100%, the element scales to 1.7 times its size, rotates by -45 degrees, and fades out to 0 opacity.
+  .pop-element:
+  
+  The class that applies the animation.
+  Uses animation shorthand:
+  pop: Name of the animation.
+  0.5s: Duration of the animation.
+  ease-out: Easing function for smooth transitions.
+  forwards: Keeps the final state of the animation after it's complete.
+  How to Use:
+  Add the class pop-element to any HTML element to see the animation:
+  
+  html
+  Copy code
+  <div class="pop-element"></div>
+  Optional Enhancements:
+  You can make it more dynamic by using animation-delay or triggering it with JavaScript.
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: #dc143c;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgb(7, 7, 20);
+}
+
+/* Gray Heart */
+.gray-heart {
+    background: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+.gray-heart::before,
+.gray-heart::after {
+    content: "";
+    background: #ccc;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+}
+
+.gray-heart::before {
+    top: -50px;
+    left: 0;
+}
+
+.gray-heart::after {
+    left: 50px;
+    top: 0;
+}
+
+/* Red-Heart */
+.red-heart {
+    background: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    transform: rotate(-45deg);
+    position: absolute;
+    visibility: hidden;
+}
+
+.red-heart::before,
+.red-heart::after {
+    content: "";
+    background: var(--main-color);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+.red-heart::before {
+    top: -50px;
+    left: 0;
+}
+
+.red-heart::after {
+    left: 50px;
+    top: 0;
+}
+
+.red-heart.animation {
+    animation: pop 0.9s linear;
+    visibility: visible;
+}
+  
+.red-heart.fill-color {
+    background: var(--main-color);
+}
+  
+@keyframes pop {
+    100% {
+      transform: scale(1.7) rotate(-45deg);
+      opacity: 0;
+    }
+}
